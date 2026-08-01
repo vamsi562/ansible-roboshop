@@ -1,0 +1,17 @@
+- name: catalogue setup
+  hosts: mysql
+  become: true
+  tasks:
+    - name: install sql server
+      ansible.builtin.package:
+        name: mysql-server
+        state: present
+
+    - name: sql service enable and start
+      ansible.builtin.service:
+        name: mysqld
+        state: present
+        enabled: yes
+
+    - name: set root password
+      ansible.builtin.command: mysql_secure_installation --set-root-pass RoboShop@1
