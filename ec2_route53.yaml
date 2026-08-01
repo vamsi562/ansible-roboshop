@@ -36,12 +36,12 @@
   - name: debug private ip
     ansible.builtin.debug:
       msg: "{{ item.instances[0].private_ip_address }}"
-      var: ec2_output.results
+      loop: ec2_output.results
 
   - name: debug public ip
     ansible.builtin.debug:
       msg: "{{ item.instances[0].public_ip_address }}"
-      var: ec2_output.results
+      loop: ec2_output.results
 
 
 
