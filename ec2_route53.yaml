@@ -8,6 +8,7 @@
     ami_id: "ami-0220d79f3f480ecf5"
     security_group_id: "sg-0409773d198d0da2f"
     subnet_id: "subnet-09332e278172839a0"
+    domain: "chikoo.fun"
     # instance:
     # - mongo
     # - redis
@@ -33,15 +34,39 @@
   #   ansible.builtin.debug:
   #     msg: ec2_output
 
-  - name: debug private ip
-    ansible.builtin.debug:
-      msg: "{{ item.instances[0].private_ip_address }}"
-    loop: "{{ ec2_output.results }}"
+  # - name: debug private ip
+  #   ansible.builtin.debug:
+  #     msg: "{{ item.instances[0].private_ip_address }}"
+  #   loop: "{{ ec2_output.results }}"
 
-  - name: debug public ip
-    ansible.builtin.debug:
-      msg: "{{ item.instances[0].public_ip_address }}"
-    loop: "{{ ec2_output.results }}"
+  # - name: debug public ip
+  #   ansible.builtin.debug:
+  #     msg: "{{ item.instances[0].public_ip_address }}"
+  #   loop: "{{ ec2_output.results }}"
+- name: Create a standard A record
+  amazon.aws.route53:
+    state: present
+    zone: "{{ domain }}"
+    record: "{{ item.item }}.{{ domain }}"
+    type: A
+    ttl: 1
+    value: "{{ item.instances[0].private_ip_address }}"
+    overwrite: true
+  loop: "{{ ec2_output.results }}"
+
+- name: Create a standard A record
+  amazon.aws.route53:
+    state: present
+    zone: "{{ domain }}"
+    record: "{{ domain }}"
+    type: A
+    ttl: 1
+    value: "{{ item.instances[0].public_ip_address }}"
+    overwrite: true
+  when: item.item == "frontend"
+  loop: "{{ ec2_output.results }}"
+
+
 
 
 
