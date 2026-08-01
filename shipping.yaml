@@ -39,9 +39,13 @@
 
     - name: run maven commands
       ansible.builtin.command: mvn clean package
+      args:
+        chdir: /app
     
     - name: copy jar file
       ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar
+      args:
+        chdir: /app
 
     - name: copy shipping service file
       ansible.builtin.copy:
