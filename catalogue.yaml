@@ -63,11 +63,11 @@
         state: present
 
     - name: connnect to mongodb catalogue
-      ansible.builtin.command: mongosh mongodb.daws86s.fun --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')"
+      ansible.builtin.command: mongosh mongodb.chikoo.fun --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')"
       register: catalogue_output
 
     - name: load products into mongodb
-      ansible.builtin.shell: mongosh --host mongodb.daws86s.fun </app/db/master-data.js
+      ansible.builtin.shell: mongosh --host mongodb.chikoo.fun </app/db/master-data.js
       when: catalogue_output.stdout | int < 0
 
     - name: systemd  reload config files
