@@ -1,0 +1,27 @@
+- name: New ec2 instances using ansible
+  hosts: local
+  connection: local
+  vars:
+    aws_region: "us-east-1"
+    instance_type: "t3.micro"
+    # Amazon Linux 2023 AMI ID (verify ID for your chosen region)
+    ami_id: "ami-0220d79f3f480ecf5"
+    security_group_id: "sg-0409773d198d0da2f"
+    instances:
+    - mongo
+    - redis
+    - mysql
+    - rabbitmq
+
+  tasks:
+  - name: "Launch the EC2 Instance"
+    amazon.aws.ec2_instance:
+        name: "{{ item }}"
+        instance_type: "{{ instance_type }}"
+        image_id: "{{ ami_id }}"
+        region: "{{ aws_region }}"
+        security_group: "{{ security_group_id }}"
+        tags:
+          Name: "{{ item }}"
+    register: ec2_output
+    loop: "{{ instances }}"
