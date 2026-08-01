@@ -29,8 +29,13 @@
     register: ec2_output
     loop: "{{ instance }}"
 
+  - name: debug output
+    ansible.builtin.debug:
+      var: ec2_output
+
 
 
 
 # Commands:
 # ansible-playbook -i inventory.ini ec2_route53.yaml
+# ansible-playbook -i inventory.ini ec2_route53.yaml -e instance=['mongo','mysql']
