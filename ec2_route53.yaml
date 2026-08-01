@@ -43,28 +43,28 @@
   #   ansible.builtin.debug:
   #     msg: "{{ item.instances[0].public_ip_address }}"
   #   loop: "{{ ec2_output.results }}"
-- name: Create a standard A record
-  amazon.aws.route53:
-    state: present
-    zone: "{{ domain }}"
-    record: "{{ item.item }}.{{ domain }}" #mongodb.chikoo.fun
-    type: A
-    ttl: 1
-    value: "{{ item.instances[0].private_ip_address }}"
-    overwrite: true
-  loop: "{{ ec2_output.results }}"
+  - name: Create a standard A record
+    amazon.aws.route53:
+      state: present
+      zone: "{{ domain }}"
+      record: "{{ item.item }}.{{ domain }}" #mongodb.chikoo.fun
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].private_ip_address }}"
+      overwrite: true
+    loop: "{{ ec2_output.results }}"
 
-- name: Create a standard A record
-  amazon.aws.route53:
-    state: present
-    zone: "{{ domain }}"
-    record: "{{ domain }}"
-    type: A
-    ttl: 1
-    value: "{{ item.instances[0].public_ip_address }}"
-    overwrite: true
-  when: item.item == "frontend"
-  loop: "{{ ec2_output.results }}"
+  - name: "Create a frontend record"
+    amazon.aws.route53:
+      state: present
+      zone: "{{ domain }}"
+      record: "{{ domain }}"
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].public_ip_address }}"
+      overwrite: true
+    when: item.item == "frontend"
+    loop: "{{ ec2_output.results }}"
 
 
 
