@@ -29,9 +29,13 @@
     register: ec2_output
     loop: "{{ instance }}"
 
-  - name: debug output
+  # - name: debug output
+  #   ansible.builtin.debug:
+  #     var: ec2_output
+
+  - name: debug private ip
     ansible.builtin.debug:
-      var: ec2_output
+      var: ec2_output.instances.private_ip_address
 
 
 
