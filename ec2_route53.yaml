@@ -7,6 +7,7 @@
     # Amazon Linux 2023 AMI ID (verify ID for your chosen region)
     ami_id: "ami-0220d79f3f480ecf5"
     security_group_id: "sg-0409773d198d0da2f"
+    subnet_id: "subnet-09332e278172839a0"
     instances:
     - mongo
     - redis
@@ -21,6 +22,8 @@
         image_id: "{{ ami_id }}"
         region: "{{ aws_region }}"
         security_group: "{{ security_group_id }}"
+        vpc_subnet_id: "{{ subnet_id }}"
+          
         tags:
           Name: "{{ item }}"
     register: ec2_output
