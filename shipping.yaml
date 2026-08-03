@@ -1,8 +1,6 @@
 - name: shipping setup
   hosts: shipping
   become: true
-  vars:
-    ansible_python_interpreter: /usr/bin/python3
   tasks:
     - name: install maven
       ansible.builtin.package:
