@@ -12,7 +12,7 @@ module: **amazon.aws.ec2_instance**
 ------------
 
 ``` 
-ansible-playbook -i inventory.ini -e "instance=['mongob','mysql','redis','rabbitmq','cart','catalogue','payment','shipping','user','frontend']"  ec2_route53.yaml 
+ansible-playbook -i inventory.ini -e "instance=['mongodb','mysql','redis','rabbitmq','cart','catalogue','payment','shipping','user','frontend']"  ec2_route53.yaml 
 
 ```
 
