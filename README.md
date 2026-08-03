@@ -25,6 +25,6 @@ ansible-playbook -i inventory.ini user.yaml
 ansible-playbook -i inventory.ini payment.yaml
 ansible-playbook -i inventory.ini mysql.yaml
 ansible-playbook -i inventory.ini redis.yaml
-ansible-playbook -i inventory.ini rabbimq.yaml
+ansible-playbook -i inventory.ini rabbitmq.yaml
 ansible-playbook -i inventory.ini frontend.yaml
 ```

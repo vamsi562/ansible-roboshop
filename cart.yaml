@@ -50,7 +50,7 @@
     - name: copy cart service file
       ansible.builtin.copy:
         src: cart.service
-        dest: /etc/systemd/system/user.service
+        dest: /etc/systemd/system/cart.service
 
     - name: systemd  reload config files
       ansible.builtin.systemd_service:
