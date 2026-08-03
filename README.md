@@ -23,6 +23,7 @@ ansible-playbook -i inventory.ini catalogue.yaml
 ansible-playbook -i inventory.ini cart.yaml
 ansible-playbook -i inventory.ini user.yaml
 ansible-playbook -i inventory.ini payment.yaml
+ansible-playbook -i inventory.ini shipping.yaml
 ansible-playbook -i inventory.ini mysql.yaml
 ansible-playbook -i inventory.ini redis.yaml
 ansible-playbook -i inventory.ini rabbitmq.yaml
