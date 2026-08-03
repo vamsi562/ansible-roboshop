@@ -26,11 +26,11 @@
     - name: Download frontend app zip file
       ansible.builtin.get_url:
         url: https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
-        dest: /tmp/shipping.zip
+        dest: /tmp/frontend.zip
 
     - name: Unzip file already existing on the remote server
       ansible.builtin.unarchive:
-        src: /tmp/shipping.zip
+        src: /tmp/frontend.zip
         dest: /usr/share/nginx/html
         remote_src: yes
 
